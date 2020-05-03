@@ -1,0 +1,21 @@
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+execute_script files/script1.txt
+show
+info
