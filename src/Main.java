@@ -25,8 +25,16 @@ public class Main {
         AllCommands allCommands = new AllCommands();
         Scanner sc = new Scanner(System.in);
         DatagramChannel datagramChannel = DatagramChannel.open();
-        SocketAddress socketAddress = new InetSocketAddress("localhost", 62222);
-
+        SocketAddress socketAddress = null;
+        while(true){
+            try {
+                int port = Integer.parseInt(Terminal.readLine("Введите порт сервера:"));
+                socketAddress = new InetSocketAddress("localhost", port);
+                break;
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+        }
         Listener listener = new Listener(datagramChannel, socketAddress);
         listener.start();
 
@@ -82,7 +90,7 @@ public class Main {
         Person person = new Person();
         String buf;
         while (true) {
-            buf = Terminal.readLine("Введите имя");
+            buf = Terminal.readLine("Введите имя").trim();
             if (!buf.equals("")) {
                 person.setName(buf);
                 break;
@@ -90,7 +98,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите координату X");
+                buf = Terminal.readLine("Введите координату X").trim();
                 if (!buf.equals("") && (Long.parseLong(buf) < Long.MAX_VALUE && Long.parseLong(buf) > Long.MIN_VALUE)) {
                     person.getCoordinates().setX(Long.parseLong(buf));
                     break;
@@ -101,7 +109,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите координату Y");
+                buf = Terminal.readLine("Введите координату Y").trim();
                 if (!buf.equals("") && (Float.parseFloat(buf) < Float.MAX_VALUE || Float.parseFloat(buf) > Float.MIN_VALUE)) {
                     person.getCoordinates().setY(Float.parseFloat(buf));
                     break;
@@ -112,7 +120,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите рост");
+                buf = Terminal.readLine("Введите рост").trim();
                 if (!buf.equals("") && (Float.parseFloat(buf) > 0 || Float.parseFloat(buf) < Float.MAX_VALUE)) {
                     person.setHeight(Float.parseFloat(buf));
                     break;
@@ -123,7 +131,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите цвет глаз (Возможные цвета: RED, BLUE, YELLOW)");
+                buf = Terminal.readLine("Введите цвет глаз (Возможные цвета: RED, BLUE, YELLOW)").trim();
                 if (!buf.equals("")) {
                     person.setEyeColor(EyeColor.valueOf(buf.toUpperCase()));
                     break;
@@ -134,7 +142,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите цвет волос (Возможные цвета: GREEN, BLACK, PINK, YELLOW, ORANGE, WHITE)");
+                buf = Terminal.readLine("Введите цвет волос (Возможные цвета: GREEN, BLACK, PINK, YELLOW, ORANGE, WHITE)").trim();
                 if (!buf.equals("")) {
                     person.setHairColor(HairColor.valueOf(buf.toUpperCase()));
                     break;
@@ -145,7 +153,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите национальность (Возможные национальности: INDIA, VATICAN, NORTH_AMERICA, JAPAN)");
+                buf = Terminal.readLine("Введите национальность (Возможные национальности: INDIA, VATICAN, NORTH_AMERICA, JAPAN)").trim();
                 if (!buf.equals("")) {
                     person.setNationality(Country.valueOf(buf.toUpperCase()));
                     break;
@@ -156,7 +164,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите координату локации X");
+                buf = Terminal.readLine("Введите координату локации X").trim();
                 if (!buf.equals("") && (Integer.parseInt(buf) < Integer.MAX_VALUE || Integer.parseInt(buf) > Integer.MIN_VALUE)) {
                     person.getLocation().setX(Integer.parseInt(buf));
                     break;
@@ -167,7 +175,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите координату локации Y");
+                buf = Terminal.readLine("Введите координату локации Y").trim();
                 if (!buf.equals("") && (Float.parseFloat(buf) < Float.MAX_VALUE || Float.parseFloat(buf) > Float.MIN_VALUE)) {
                     person.getLocation().setY(Float.parseFloat(buf));
                     break;
@@ -178,7 +186,7 @@ public class Main {
         }
         while (true) {
             try {
-                buf = Terminal.readLine("Введите координату локации Z");
+                buf = Terminal.readLine("Введите координату локации Z").trim();
                 if (!buf.equals("") && (Float.parseFloat(buf) < Float.MAX_VALUE || Float.parseFloat(buf) > Float.MIN_VALUE)) {
                     person.getLocation().setY(Float.parseFloat(buf));
                     break;

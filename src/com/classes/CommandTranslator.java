@@ -194,12 +194,12 @@ public class CommandTranslator {
     public static String translatePerson(Person person){
         String ans = "{";
         ans = ans + "\"name\":\""+person.getName()+"\";";
-        ans = ans + "\"coordinates\":{\"X\":\""+person.getCoordinates().getX()+"\";\"Y\":\""+person.getCoordinates().getY()+"\";};";
+        ans = ans + "\"coordinates\"{\"X\":\""+person.getCoordinates().getX()+"\";\"Y\":\""+person.getCoordinates().getY()+"\";};";
         ans = ans + "\"height\":\""+person.getHeight()+"\";";
-        ans = ans + "\"eyecolor\":\""+person.getEyeColor().toString()+"\";";
-        ans = ans + "\"haircolor\":\""+person.getHairColor().toString()+"\";";
+        ans = ans + "\"eyeColor\":\""+person.getEyeColor().toString()+"\";";
+        ans = ans + "\"hairColor\":\""+person.getHairColor().toString()+"\";";
         ans = ans + "\"nationality\":\""+person.getNationality().toString()+"\";";
-        ans = ans + "\"location\":{\"X\":\""+person.getLocation().getX()+"\";\"Y\":\""+ person.getLocation().getY()+"\";\"Z\":\""+person.getLocation().getZ()+"\";};";
+        ans = ans + "\"location\"{\"X\":\""+person.getLocation().getX()+"\";\"Y\":\""+ person.getLocation().getY()+"\";\"Z\":\""+person.getLocation().getZ()+"\"};";
         return ans;
     }
 
