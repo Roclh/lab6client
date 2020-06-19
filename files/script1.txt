@@ -1,3 +1,1 @@
-add {"name":"Степан";"height":"200";}
-add {"name":"Кирилл";"height":"199";}
-count_by_hair_color Pink
+add {"name":"Котик";"height":"200";}

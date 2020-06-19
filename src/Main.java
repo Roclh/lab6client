@@ -1,7 +1,4 @@
-import com.classes.CommandTranslator;
-import com.classes.Listener;
-import com.classes.Sender;
-import com.classes.Terminal;
+import com.classes.*;
 import com.classes.serverSide.answers.Request;
 import com.enums.Country;
 import com.enums.EyeColor;
@@ -40,6 +37,7 @@ public class Main {
 
         Sender sender = new Sender(datagramChannel, socketAddress);
         System.out.println("Клиент готов к работе.");
+        new Start(sender);
         while (true) {
             try {
                 Thread.sleep(100);
@@ -54,12 +52,13 @@ public class Main {
                 } else if(userCommand.getCommand().equals("add")&&userCommand.getArg1().equals("")){
                     add(sender);
                 }else if (userCommand.getCommand().equals("exit") && userCommand.getArg1().equals("")) {
+                    sender.send(new Request(Start.connection.getUserName(), "exit", "", ""));
                     System.out.println("Завершение работы клиента.");
                     System.exit(0);
                 } else if (userCommand.getCommand().equals("exit") && !userCommand.getArg1().equals("")) {
                     System.out.println("У данной команды нету второго аргумента");
                 } else {
-                    Request request = new Request(userCommand.getCommand(), userCommand.getArg1(), userCommand.getArg2());
+                    Request request = new Request(Start.connection.getUserName(),userCommand.getCommand(), userCommand.getArg1(), userCommand.getArg2());
                     sender.send(request);
                 }
             }
@@ -78,7 +77,7 @@ public class Main {
                     if(userCommand1.getCommand().equals("execute_script")){
                         execute_script(userCommand1.getArg1(), sender);
                     }
-                    Request request = new Request(userCommand1.getCommand(), userCommand1.getArg1(), userCommand1.getArg2());
+                    Request request = new Request(Start.connection.getUserName(),userCommand1.getCommand(), userCommand1.getArg1(), userCommand1.getArg2());
                     sender.send(request);
                 }
                 HistoryWrapper.popScriptPath(filepath);
@@ -196,7 +195,7 @@ public class Main {
             }
         }
         UserCommand userCommand = new UserCommand("add", CommandTranslator.translatePerson(person));
-        Request request = new Request(userCommand.getCommand(), userCommand.getArg1(), userCommand.getArg2());
+        Request request = new Request(Start.connection.getUserName(),userCommand.getCommand(), userCommand.getArg1(), userCommand.getArg2());
         sender.send(request);
     }
 }

@@ -51,7 +51,19 @@ public class Listener extends Thread{
                         Answer newAnswer = (Answer) objectInputStream.readObject();
                         System.out.print(newAnswer.getValue());
                     }
-                } else { System.out.println(answer.getValue()); }
+                }
+                else if(answer.getValue().equals("AllFine")){
+                    Start.status = "AllFine";
+                    Start.connection = new Connection(Start.name, Start.password);
+                } else if(answer.getValue().equals("AlreadyInUse")){
+                    Start.status = "AlreadyInUse";
+                }
+                else if(answer.getValue().equals("WrongPassword")){
+                    Start.status = "WrongPassword";
+                }
+                else{ System.out.println(answer.getValue()); }
+
+
 
                 objectInputStream.close();
                 byteArrayInputStream.close();
