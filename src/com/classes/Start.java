@@ -12,11 +12,15 @@ public class Start {
         boolean isWorking = true;
         while(isWorking){
             switch(Terminal.readLine("Выберите действие:\n1. Авторизация\n2. Регистрация")){
-                case "1": Authorization(sender);
-                    isWorking = false;
+                case "1":
+                    if(Authorization(sender)) {
+                        isWorking = false;
+                    }
                     break;
-                case "2": Registration(sender);
-                    isWorking = false;
+                case "2":
+                    if(Registration(sender)){
+                        isWorking = false;
+                    }
                     break;
                 default:System.out.println("Такого варианта ответа не существует");
             }
@@ -24,7 +28,7 @@ public class Start {
     }
 
 
-    public void Registration(Sender sender){
+    public boolean Registration(Sender sender){
         boolean inName = true;
         boolean inPassword = true;
         boolean isSent = false;
@@ -35,13 +39,20 @@ public class Start {
                 e.printStackTrace();
             }
             while (inName) {
+                System.out.println("Для выхода из меню напишите exit");
                 name = Terminal.readLine("Введите имя пользователя (не менее 5 символов)");
+                if(name.equals("exit")){
+                    return false;
+                }
                 if (name.length() >= 5) {
                     inName = false;
                 } else System.out.println("Такое имя не подходит");
             }
             while (inPassword) {
                 password = Terminal.readLine("Введите пароль пользователя (не менее 5 символов)");
+                if(name.equals("exit")){
+                    return false;
+                }
                 if (password.length() >= 5) {
                     inPassword = false;
                 } else System.out.println("Такой пароль не подходит");
@@ -51,7 +62,7 @@ public class Start {
                 sender.send(request);
                 isSent = true;
             }else if(status.equals("AllFine")&&status!=null){
-                break;
+                return true;
             } else if(status.equals("AlreadyInUse")&&status!=null){
                 System.out.println("Такой аккаунт уже занят.");
                 status = "Nothing Yet";
@@ -63,7 +74,7 @@ public class Start {
 
     }
 
-    public void Authorization(Sender sender){
+    public boolean Authorization(Sender sender){
         boolean inName = true;
         boolean inPassword = true;
         boolean isSent = false;
@@ -74,13 +85,20 @@ public class Start {
                 e.printStackTrace();
             }
             while (inName) {
+                System.out.println("Для выхода из меню напишите exit");
                 name = Terminal.readLine("Введите свое имя");
+                if(name.equals("exit")){
+                    return false;
+                }
                 if (name.length() >= 5) {
                     inName = false;
                 } else System.out.println("Вы ввели неверное имя");
             }
             while (inPassword) {
                 password = Terminal.readLine("Введите пароль");
+                if(name.equals("exit")){
+                    return false;
+                }
                 if (password.length() >= 5) {
                     inPassword = false;
                 } else System.out.println("Вы ввели неверный пароль");
@@ -90,9 +108,15 @@ public class Start {
                 sender.send(request);
                 isSent = true;
             }else if(status.equals("AllFine")){
-                break;
-            } else if(status.equals("WrongPassword")){
-                System.out.println("Пароль введен неверно.");
+                return true;
+            } else if(status.equals("AlreadyInUse")){
+                System.out.println("Пользователь уже авторизирован.");
+                status = "Nothing Yet";
+                inName = true;
+                inPassword = true;
+                isSent = false;
+            }else if(status.equals("WrongPassword")){
+                System.out.println("Неверно введен пароль.");
                 status = "Nothing Yet";
                 inName = true;
                 inPassword = true;
